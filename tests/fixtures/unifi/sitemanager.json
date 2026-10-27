@@ -1,0 +1,422 @@
+{
+ "_about": "UniFi Site Manager API (https://api.ui.com, X-API-KEY) answers, shaped like API v1 / early-access ISP metrics. Path -> JSON. Documentation IPs only.",
+ "/v1/hosts?pageSize=100": {
+  "httpStatusCode": 200,
+  "traceId": "t1",
+  "nextToken": "page2",
+  "data": [
+   {
+    "id": "host-home",
+    "hardwareId": "hw-1",
+    "type": "console",
+    "ipAddress": "203.0.113.7",
+    "owner": true,
+    "isBlocked": false,
+    "latestBackupTime": "2026-10-18T03:00:00Z",
+    "reportedState": {
+     "name": "Home",
+     "hostname": "home-udm",
+     "state": "connected",
+     "version": "4.3.6",
+     "hardware": {
+      "name": "UniFi Dream Machine Pro",
+      "shortname": "UDMPRO",
+      "firmwareVersion": "4.3.6"
+     }
+    }
+   }
+  ]
+ },
+ "/v1/hosts?pageSize=100&nextToken=page2": {
+  "httpStatusCode": 200,
+  "traceId": "t2",
+  "data": [
+   {
+    "id": "host-parents",
+    "hardwareId": "hw-2",
+    "type": "console",
+    "ipAddress": "198.51.100.20",
+    "owner": true,
+    "isBlocked": false,
+    "latestBackupTime": "2026-10-18T04:00:00Z",
+    "reportedState": {
+     "name": "Mom and Dad",
+     "hostname": "parents-ucg",
+     "state": "disconnected",
+     "version": "4.2.9",
+     "hardware": {
+      "name": "UniFi Cloud Gateway Ultra",
+      "shortname": "UCGULTRA",
+      "firmwareVersion": "4.2.9"
+     }
+    }
+   }
+  ]
+ },
+ "/v1/sites?pageSize=100": {
+  "httpStatusCode": 200,
+  "traceId": "t3",
+  "data": [
+   {
+    "siteId": "site-home",
+    "hostId": "host-home",
+    "isOwner": true,
+    "permission": "admin",
+    "meta": {
+     "name": "default",
+     "desc": "Default",
+     "timezone": "America/Los_Angeles",
+     "gatewayMac": "74:ac:b9:00:00:01"
+    },
+    "statistics": {
+     "counts": {
+      "totalDevice": 4,
+      "offlineDevice": 1,
+      "wifiClient": 1,
+      "wiredClient": 2,
+      "guestClient": 0,
+      "criticalNotification": 0,
+      "pendingUpdateDevice": 2,
+      "offlineGatewayDevice": 0
+     },
+     "ispInfo": {
+      "name": "Example Fiber",
+      "organization": "Example Fiber LLC"
+     },
+     "percentages": {
+      "wanUptime": 50,
+      "txRetry": 4.1
+     },
+     "internetIssues": [],
+     "wans": {
+      "WAN": {
+       "externalIp": "203.0.113.99",
+       "wanUptime": 99.93060000240803,
+       "wanIssues": []
+      },
+      "WAN2": {
+       "wanUptime": 0,
+       "wanIssues": [
+        {
+         "count": 288,
+         "wanDowntime": true
+        }
+       ]
+      }
+     }
+    }
+   },
+   {
+    "siteId": "site-home",
+    "hostId": "host-home",
+    "isOwner": true,
+    "permission": "admin",
+    "meta": {
+     "name": "default",
+     "desc": "Default",
+     "timezone": "America/Los_Angeles",
+     "gatewayMac": "74:ac:b9:00:00:01"
+    },
+    "statistics": {
+     "counts": {
+      "totalDevice": 4,
+      "offlineDevice": 1,
+      "wifiClient": 2,
+      "wiredClient": 2,
+      "guestClient": 0,
+      "criticalNotification": 0,
+      "pendingUpdateDevice": 2,
+      "offlineGatewayDevice": 0
+     },
+     "ispInfo": {
+      "name": "Example Fiber",
+      "organization": "Example Fiber LLC"
+     },
+     "percentages": {
+      "wanUptime": 99.93060000240803,
+      "txRetry": 4.1
+     },
+     "internetIssues": [],
+     "wans": {
+      "WAN": {
+       "externalIp": "203.0.113.7",
+       "wanUptime": 99.93060000240803,
+       "wanIssues": []
+      },
+      "WAN2": {
+       "wanUptime": 0,
+       "wanIssues": [
+        {
+         "count": 288,
+         "wanDowntime": true
+        }
+       ]
+      }
+     }
+    }
+   },
+   {
+    "siteId": "site-parents",
+    "hostId": "host-parents",
+    "isOwner": true,
+    "permission": "admin",
+    "meta": {
+     "name": "default",
+     "desc": "Default",
+     "timezone": "America/Los_Angeles",
+     "gatewayMac": "74:ac:b9:00:00:10"
+    },
+    "statistics": {
+     "counts": {
+      "totalDevice": 2,
+      "offlineDevice": 0,
+      "wifiClient": 6,
+      "wiredClient": 1,
+      "guestClient": 0,
+      "criticalNotification": 1,
+      "pendingUpdateDevice": 0,
+      "offlineGatewayDevice": 0
+     },
+     "ispInfo": {
+      "name": "Example Cable",
+      "organization": "Example Cable Inc"
+     },
+     "percentages": {
+      "wanUptime": 97.2,
+      "txRetry": 9.8
+     },
+     "internetIssues": [
+      {
+       "index": 1,
+       "highLatency": true,
+       "latencyAvgMs": 180
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "/v1/devices?pageSize=100": {
+  "httpStatusCode": 200,
+  "traceId": "t4",
+  "data": [
+   {
+    "hostId": "host-home-old",
+    "hostName": "Home",
+    "updatedAt": "2025-10-29T19:26:45Z",
+    "devices": [
+     {
+      "id": "74ACB9000002",
+      "mac": "74ACB9000002",
+      "name": "Rack Switch",
+      "model": "USW Pro 24",
+      "status": "offline",
+      "version": "7.0.0"
+     }
+    ]
+   },
+   {
+    "hostId": "host-home",
+    "hostName": "Home",
+    "updatedAt": "2025-10-30T00:55:33Z",
+    "devices": [
+     {
+      "id": "74ACB9000001",
+      "mac": "74ACB9000001",
+      "name": "Home Gateway",
+      "model": "UDM Pro",
+      "shortname": "UDMPRO",
+      "ip": "198.51.100.1",
+      "productLine": "network",
+      "status": "offline",
+      "version": "4.3.6",
+      "firmwareStatus": "updateAvailable",
+      "updateAvailable": "4.4.1",
+      "isConsole": true,
+      "isManaged": true
+     },
+     {
+      "id": "74ACB9000004",
+      "mac": "74ACB9000004",
+      "name": "Garage AP",
+      "model": "U6 Lite",
+      "shortname": "UAL6",
+      "ip": "198.51.100.4",
+      "productLine": "network",
+      "status": "offline",
+      "version": "6.6.77",
+      "firmwareStatus": "updateAvailable",
+      "updateAvailable": "6.7.31",
+      "isConsole": false,
+      "isManaged": true
+     }
+    ]
+   },
+   {
+    "hostId": "host-home",
+    "hostName": "Home",
+    "updatedAt": "2026-10-19T06:00:00Z",
+    "devices": [
+     {
+      "id": "74ACB9000001",
+      "mac": "74ACB9000001",
+      "name": "Home Gateway",
+      "model": "UDM Pro",
+      "shortname": "UDMPRO",
+      "ip": "198.51.100.1",
+      "productLine": "network",
+      "status": "online",
+      "version": "4.3.6",
+      "firmwareStatus": "updateAvailable",
+      "updateAvailable": "4.4.1",
+      "isConsole": true,
+      "isManaged": true
+     },
+     {
+      "id": "74ACB9000004",
+      "mac": "74ACB9000004",
+      "name": "Garage AP",
+      "model": "U6 Lite",
+      "shortname": "UAL6",
+      "ip": "198.51.100.4",
+      "productLine": "network",
+      "status": "offline",
+      "version": "6.6.77",
+      "firmwareStatus": "updateAvailable",
+      "updateAvailable": "6.7.31",
+      "isConsole": false,
+      "isManaged": true
+     }
+    ]
+   },
+   {
+    "hostId": "host-parents",
+    "hostName": "Mom and Dad",
+    "updatedAt": "2026-10-19T06:00:00Z",
+    "devices": [
+     {
+      "id": "74ACB9000010",
+      "mac": "74ACB9000010",
+      "name": "Parents Gateway",
+      "model": "UCG Ultra",
+      "shortname": "UCGULTRA",
+      "ip": "192.0.2.1",
+      "productLine": "network",
+      "status": "online",
+      "version": "4.2.9",
+      "firmwareStatus": "upToDate",
+      "updateAvailable": null,
+      "isConsole": true,
+      "isManaged": true
+     },
+     {
+      "id": "74ACB9000011",
+      "mac": "74ACB9000011",
+      "name": "Parents AP",
+      "model": "U6 Mesh",
+      "shortname": "U6M",
+      "ip": "192.0.2.20",
+      "productLine": "network",
+      "status": "online",
+      "version": "6.7.31",
+      "firmwareStatus": "upToDate",
+      "updateAvailable": null,
+      "isConsole": false,
+      "isManaged": true
+     },
+     {
+      "id": "cam1",
+      "mac": "EC71DB000001",
+      "name": "Manufacturer RLC-810A ",
+      "model": "IPC-BO",
+      "ip": "192.0.2.142",
+      "status": "offline",
+      "version": "UNKNOWN",
+      "firmwareStatus": null,
+      "updateAvailable": null
+     }
+    ]
+   }
+  ]
+ },
+ "/ea/isp-metrics/5m?duration=24h": {
+  "httpStatusCode": 200,
+  "traceId": "t5",
+  "data": [
+   {
+    "metricType": "5m",
+    "hostId": "host-home",
+    "siteId": "site-home",
+    "periods": [
+     {
+      "metricTime": "2026-10-19T04:00:00Z",
+      "data": {
+       "wan": {
+        "avgLatency": 10,
+        "maxLatency": 30,
+        "packetLoss": 0,
+        "downtime": 0,
+        "uptime": 100,
+        "ispName": "Example Fiber",
+        "download_kbps": 900000,
+        "upload_kbps": 880000
+       }
+      }
+     },
+     {
+      "metricTime": "2026-10-19T05:00:00Z",
+      "data": {
+       "wan": {
+        "avgLatency": 14,
+        "maxLatency": 40,
+        "packetLoss": 0,
+        "downtime": 0,
+        "uptime": 100,
+        "ispName": "Example Fiber",
+        "download_kbps": 910000,
+        "upload_kbps": 870000
+       }
+      }
+     }
+    ]
+   },
+   {
+    "metricType": "5m",
+    "hostId": "host-parents",
+    "siteId": "site-parents",
+    "periods": [
+     {
+      "metricTime": "2026-10-19T04:00:00Z",
+      "data": {
+       "wan": {
+        "avgLatency": 150,
+        "maxLatency": 600,
+        "packetLoss": 3,
+        "downtime": 120,
+        "uptime": 96,
+        "ispName": "Example Cable",
+        "download_kbps": 200000,
+        "upload_kbps": 10000
+       }
+      }
+     },
+     {
+      "metricTime": "2026-10-19T05:00:00Z",
+      "data": {
+       "wan": {
+        "avgLatency": 210,
+        "maxLatency": 900,
+        "packetLoss": 1,
+        "downtime": 0,
+        "uptime": 100,
+        "ispName": "Example Cable",
+        "download_kbps": 180000,
+        "upload_kbps": 9000
+       }
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

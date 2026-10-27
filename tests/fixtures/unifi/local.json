@@ -1,0 +1,39 @@
+{
+  "_about": "UniFi Network Integration API (local gateway, X-API-KEY) answers, shaped like UniFi Network 9.x. Path -> JSON. Documentation IPs only.",
+  "/proxy/network/integration/v1/info": {"applicationVersion": "9.4.19"},
+  "/proxy/network/integration/v1/sites?offset=0&limit=200": {
+    "offset": 0, "limit": 200, "count": 1, "totalCount": 1,
+    "data": [{"id": "88f7af54-98f8-306a-a1c7-c9349722b1f6", "internalReference": "default", "name": "Default"}]},
+  "/proxy/network/integration/v1/sites/88f7af54-98f8-306a-a1c7-c9349722b1f6/devices?offset=0&limit=200": {
+    "offset": 0, "limit": 200, "count": 4, "totalCount": 4,
+    "data": [
+      {"id": "d-gw", "name": "Home Gateway", "model": "UDM Pro", "macAddress": "74:ac:b9:00:00:01", "ipAddress": "198.51.100.1",
+       "state": "ONLINE", "firmwareVersion": "4.3.6", "firmwareUpdatable": true, "features": ["switching", "gateway"]},
+      {"id": "d-sw", "name": "Rack Switch", "model": "USW Pro 24", "macAddress": "74:ac:b9:00:00:02", "ipAddress": "198.51.100.2",
+       "state": "ONLINE", "firmwareVersion": "7.1.26", "firmwareUpdatable": false, "features": ["switching"]},
+      {"id": "d-ap1", "name": "Living Room AP", "model": "U6 Pro", "macAddress": "74:ac:b9:00:00:03", "ipAddress": "198.51.100.3",
+       "state": "ONLINE", "firmwareVersion": "6.7.31", "firmwareUpdatable": false, "features": ["accessPoint"]},
+      {"id": "d-ap2", "name": "Garage AP", "model": "U6 Lite", "macAddress": "74:ac:b9:00:00:04", "ipAddress": "198.51.100.4",
+       "state": "OFFLINE", "firmwareVersion": "6.6.77", "firmwareUpdatable": true, "features": ["accessPoint"]}]},
+  "/proxy/network/integration/v1/sites/88f7af54-98f8-306a-a1c7-c9349722b1f6/clients?offset=0&limit=200": {
+    "offset": 0, "limit": 200, "count": 5, "totalCount": 5,
+    "data": [
+      {"id": "c1", "type": "WIRED", "name": "kihon", "ipAddress": "198.51.100.220"},
+      {"id": "c2", "type": "WIRED", "name": "hashira-1", "ipAddress": "198.51.100.222"},
+      {"id": "c3", "type": "WIRELESS", "name": "Phone", "ipAddress": "192.0.2.50"},
+      {"id": "c4", "type": "WIRELESS", "name": "Laptop", "ipAddress": "192.0.2.51"},
+      {"id": "c5", "type": "VPN", "name": "Teleport", "ipAddress": "203.0.113.2"}]},
+  "/proxy/network/api/s/default/stat/health": {
+    "meta": {"rc": "ok"},
+    "data": [
+      {"subsystem": "wan", "status": "ok", "wan_ip": "203.0.113.7", "isp_name": "Example Fiber", "gw_name": "Home Gateway",
+       "gw_version": "4.3.6", "num_gw": 1},
+      {"subsystem": "www", "status": "ok", "latency": 11, "xput_down": 912.4, "xput_up": 880.1, "drops": 1, "uptime": 1209600},
+      {"subsystem": "wlan", "status": "warning", "num_ap": 2, "num_disconnected": 1, "num_user": 2}]},
+  "/proxy/network/api/s/default/stat/alarm?archived=false": {
+    "meta": {"rc": "ok"},
+    "data": [
+      {"_id": "a1", "key": "EVT_AP_Lost_Contact", "msg": "AP[74:ac:b9:00:00:04] was disconnected", "datetime": "2026-10-18T21:04:00Z", "archived": false},
+      {"_id": "a2", "key": "EVT_GW_WANTransition", "msg": "Gateway WAN transitioned to WAN2", "datetime": "2026-10-17T09:00:00Z", "archived": false},
+      {"_id": "a3", "key": "EVT_AP_Lost_Contact", "msg": "AP[74:ac:b9:00:00:04] was disconnected", "datetime": "2026-10-16T09:00:00Z", "archived": false}]}
+}

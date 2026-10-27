@@ -1,0 +1,31 @@
+# UniFi integration, read only: one entry per API key. Two kinds of key:
+#  - a gateway's own key (fill in "Gateway address"): UniFi Network > Settings > Control Plane >
+#    Integrations > Create API Key. Reads that gateway's sites, devices, clients, WAN and alerts.
+#  - a Site Manager key (leave the address empty): unifi.ui.com > API > Create API Key. Reads every
+#    console on the UI account (home, family...), their devices, clients and internet health.
+# "Check exposure from" names a server outside the network (its Servers (SSH) entry): Hisho asks the
+# UniFi API for the public IP and checks from there whether 443/8443/80/22 answer, flagging a UniFi OS
+# login open to the internet. Hisho never changes a UniFi setting.
+name: unifi
+kind: integration
+title: UniFi
+description: "Your UniFi networks (home and family): devices, clients, internet health, alerts, and whether the gateway is open to the internet. Read only."
+version: 0.1.1
+you_need:
+  - "A UniFi gateway or console"
+  - "A UniFi API key (the gateway's own, or a Site Manager key for every console)"
+provider: provider.py
+secret_rotate: "gateway key: UniFi Network > Settings > Control Plane > Integrations (delete it and create another); Site Manager key: unifi.ui.com > API (revoke and create another)"
+entry_label: UniFi key
+entry_schema:
+  api_key: password        # the key (typed, or its secret's name, e.g. UNIFI_HOME_API_KEY)
+  url: "str?"              # gateway IP or name for its local API; empty = Site Manager (api.ui.com)
+  fingerprint: "str?"      # the gateway certificate's SHA-256 (learned by Test / Add)
+  probe_from: "str?"       # a Servers (SSH) entry outside this network to check exposure from
+  exposed_ok: "str?"       # ip:port you meant to leave open (set by the "on purpose" button)
+  note: "str?"
+entry_form:
+  api_key: "API key (paste it, or its secret's name, e.g. UNIFI_HOME_API_KEY or UNIFI_SITEMANAGER_API_KEY)"
+  url: "Gateway address for its own API, e.g. 198.51.100.1 (empty = Site Manager, all consoles)"
+  probe_from: "Check exposure from (a server outside this network on the Servers (SSH) page, e.g. offsite)"
+  note: "Note"
