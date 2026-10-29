@@ -10,13 +10,15 @@ name: unifi
 kind: integration
 title: UniFi
 description: "Your UniFi networks (home and family): devices, clients, internet health, alerts, and whether the gateway is open to the internet. Read only."
-version: 0.1.2
+version: 0.2.0
 you_need:
   - "A UniFi gateway or console"
   - "A UniFi API key (the gateway's own, or a Site Manager key for every console)"
 provider: provider.py
 secret_rotate: "gateway key: UniFi Network > Settings > Control Plane > Integrations (delete it and create another); Site Manager key: unifi.ui.com > API (revoke and create another)"
 entry_label: UniFi key
+discover:                  # Found on your network: a UniFi OS console's sign-in page (gateway, Cloud Key, UniFi OS Server)
+  - {http: "https://{ip}/", match: "UniFi", title: "UniFi console at {ip}", fill: {url: "https://{ip}"}}
 entry_schema:
   api_key: password        # the key (typed, or its secret's name, e.g. UNIFI_HOME_API_KEY)
   url: "str?"              # gateway IP or name for its local API; empty = Site Manager (api.ui.com)
@@ -26,20 +28,20 @@ entry_schema:
   note: "str?"
 entry_form:
   api_key: "API key (paste it, or its secret's name, e.g. UNIFI_HOME_API_KEY or UNIFI_SITEMANAGER_API_KEY)"
-  url: "Gateway address for its own API, e.g. 198.51.100.1 (empty = Site Manager, all consoles)"
+  url: "Gateway address for its own API, e.g. https://198.51.100.1 (empty = Site Manager, all consoles)"
   probe_from: "Check exposure from (a server outside this network on the Servers (SSH) page, e.g. offsite)"
   note: "Note"
 help:
   api_key:
     label: UniFi API key
-    say: "Two kinds work. A gateway's own key: in UniFi Network, Settings > Control Plane > Integrations > Create API Key (reads that gateway). A Site Manager key: unifi.ui.com > API > Create API Key (reads every console on your UI account). Both are read only."
-    get: "https://unifi.ui.com/api"
-    get_label: Make a Site Manager key
+    say: "For a gateway Found on your network: press Use this, then the link below opens that gateway's Integrations page (UniFi Network > Settings > Control Plane > Integrations); Create API Key, name it hisho, and paste it here. UniFi only lets you make keys on that page, so this one step is by hand. Hisho only reads with it. For every console on your UI account, use a Site Manager key instead (see Gateway address)."
+    get: "{url}/network/default/integrations"
+    get_label: Make a key on this gateway
   url:
     label: Gateway address
-    say: "Only for a gateway's own key: the address you open UniFi Network at, like 198.51.100.1. Leave it empty for a Site Manager key."
-    get: "https://developer.ui.com/"
-    get_label: UniFi API guide
+    say: "For a gateway's own key: the address you open UniFi Network at, like https://198.51.100.1. Found on your network fills it in. Leave it empty for a Site Manager key, made at unifi.ui.com > API > Create API Key, which reads every console on your UI account."
+    get: "https://unifi.ui.com/api"
+    get_label: Make a Site Manager key instead
   probe_from:
     label: Check exposure from
     say: "Optional. The name of a server outside this network, as listed on the Servers (SSH) page, like offsite. Hisho checks from there whether your gateway's login page can be reached from the internet."

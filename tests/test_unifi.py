@@ -280,3 +280,16 @@ def test_unifi_never_lets_device_ssh_credentials_through(fleet, monkeypatch, cli
     assert not [i for i, text in enumerate(seen) if SSH_SECRET in text or "ssh_password" in text.lower()]
     assert not any("setting" in url for url, _fp in fake.calls)            # no settings endpoint was ever requested
     assert "UniFi Network 9.4.19" in seen[1] and "Garage AP" in seen[1]  # the allowed fields still arrive
+
+
+def test_found_on_your_network_finds_a_console_and_links_to_its_integrations_page(addon):
+    from hisho import connect as hconnect
+    assert addons.validate_manifest(addon.manifest) == []
+    tcp = lambda ip, port, banner="": ip == "198.51.100.1" and port == 443
+    http = lambda url, match: url == "https://198.51.100.1/" and match == "UniFi"
+    got = hconnect.scan(addon, ["198.51.100.0/29"], tcp=tcp, http=http, rmcp=lambda *a: False, workers=2)
+    assert got == [{"ip": "198.51.100.1", "title": "UniFi console at 198.51.100.1", "fill": {"url": "https://198.51.100.1"}}]
+    # the key's help link is that console's own Integrations page, built from the address filled in
+    get = addons.field_help(addon)["api_key"]["get"]
+    assert get.replace("{url}", got[0]["fill"]["url"]) == "https://198.51.100.1/network/default/integrations"
+    assert "connect" not in addon.manifest

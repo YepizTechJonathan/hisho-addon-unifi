@@ -39,8 +39,12 @@ Its card shows a network with devices offline, internet trouble or an open gatew
 
 ## Settings
 
-One entry per API key. A gateway's key: UniFi Network > Settings > Control Plane > Integrations >
-Create API Key, and fill in the gateway's address. A Site Manager key: unifi.ui.com > API > Create
+One entry per API key. A gateway's key: on the page (**Add-ons > UniFi**), **Found on your network**
+lists the UniFi OS consoles Hisho sees (their sign-in page); **Use this** fills in the address, and the
+API key's **Make a key on this gateway** link opens that console's Integrations page
+(`https://<gateway>/network/default/integrations`, i.e. UniFi Network > Settings > Control Plane >
+Integrations): **Create API Key**, name it `hisho`, and paste it. UniFi has no supported way to make a key
+from a login, so this one step is by hand. A Site Manager key: unifi.ui.com > API > Create
 API Key, and leave the address empty. Test pins the gateway's certificate. Entries are kept in
 `~/Hisho/System/Config/Addons/unifi.yaml`. To rotate: delete the key where you made it and create
 another.
