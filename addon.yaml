@@ -10,7 +10,7 @@ name: unifi
 kind: integration
 title: UniFi
 description: "Your UniFi networks (home and family): devices, clients, internet health, alerts, and whether the gateway is open to the internet. Read only."
-version: 0.1.1
+version: 0.1.2
 you_need:
   - "A UniFi gateway or console"
   - "A UniFi API key (the gateway's own, or a Site Manager key for every console)"
@@ -29,3 +29,19 @@ entry_form:
   url: "Gateway address for its own API, e.g. 198.51.100.1 (empty = Site Manager, all consoles)"
   probe_from: "Check exposure from (a server outside this network on the Servers (SSH) page, e.g. offsite)"
   note: "Note"
+help:
+  api_key:
+    label: UniFi API key
+    say: "Two kinds work. A gateway's own key: in UniFi Network, Settings > Control Plane > Integrations > Create API Key (reads that gateway). A Site Manager key: unifi.ui.com > API > Create API Key (reads every console on your UI account). Both are read only."
+    get: "https://unifi.ui.com/api"
+    get_label: Make a Site Manager key
+  url:
+    label: Gateway address
+    say: "Only for a gateway's own key: the address you open UniFi Network at, like 198.51.100.1. Leave it empty for a Site Manager key."
+    get: "https://developer.ui.com/"
+    get_label: UniFi API guide
+  probe_from:
+    label: Check exposure from
+    say: "Optional. The name of a server outside this network, as listed on the Servers (SSH) page, like offsite. Hisho checks from there whether your gateway's login page can be reached from the internet."
+  note:
+    say: "Anything you want to remember about this network, like whose home it is."
